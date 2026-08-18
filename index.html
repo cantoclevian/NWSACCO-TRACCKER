@@ -32,6 +32,8 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         body {
@@ -40,6 +42,11 @@
             color: var(--gray-dark);
             transition: all 0.3s ease;
             font-size: 16px;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
         }
 
         /* ===== NAVBAR - MOBILE FIRST ===== */
@@ -146,6 +153,7 @@
             max-width: 1600px;
             margin: 0 auto;
             padding: 12px 12px;
+            flex: 1;
         }
 
         @media (min-width: 480px) {
@@ -1448,6 +1456,223 @@
             border-left-color: var(--success);
         }
 
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: white;
+            margin-top: auto;
+            border-top: 3px solid var(--ocean-blue);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 12px;
+        }
+
+        @media (min-width: 480px) {
+            .footer-content {
+                padding: 40px 16px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .footer-content {
+                padding: 50px 20px;
+            }
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 480px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 30px;
+                margin-bottom: 40px;
+            }
+        }
+
+        .footer-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 12px;
+            color: var(--ocean-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-section h3 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+                gap: 10px;
+            }
+        }
+
+        .footer-section h3 i {
+            font-size: 1.3em;
+        }
+
+        .footer-section p, 
+        .footer-section a, 
+        .footer-section li {
+            font-size: 0.9em;
+            line-height: 1.6;
+            opacity: 0.95;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-section p, 
+            .footer-section a, 
+            .footer-section li {
+                font-size: 1em;
+                margin-bottom: 10px;
+            }
+        }
+
+        .footer-section a {
+            text-decoration: none;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: var(--ocean-blue);
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-section ul li {
+                margin-bottom: 10px;
+            }
+        }
+
+        .footer-section ul li:before {
+            content: "→ ";
+            color: var(--ocean-blue);
+            margin-right: 8px;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .social-links {
+                gap: 15px;
+                margin-top: 15px;
+            }
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 136, 255, 0.2);
+            border-radius: 50%;
+            font-size: 1em;
+            transition: all 0.3s;
+            margin: 0 !important;
+        }
+
+        @media (min-width: 768px) {
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1em;
+            }
+        }
+
+        .social-links a:hover {
+            background: var(--ocean-blue);
+            transform: translateY(-3px);
+        }
+
+        .footer-divider {
+            border-top: 1px solid rgba(0, 136, 255, 0.2);
+            margin: 20px 0;
+        }
+
+        @media (min-width: 768px) {
+            .footer-divider {
+                margin: 30px 0;
+            }
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+                font-size: 0.9em;
+                gap: 20px;
+            }
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links {
+                gap: 20px;
+            }
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s;
+            font-size: 0.95em;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--ocean-blue);
+        }
+
         /* ===== TOUCH FRIENDLY ===== */
         @media (hover: none) and (pointer: coarse) {
             .btn, button {
@@ -1481,251 +1706,331 @@
         </div>
     </nav>
 
-    <!-- MAIN CONTAINER -->
-    <div class="container">
-        <!-- ERROR MESSAGE -->
-        <div id="errorMessage" class="error-message"></div>
-        <div id="successMessage" class="success-message"></div>
+    <main>
+        <!-- MAIN CONTAINER -->
+        <div class="container">
+            <!-- ERROR MESSAGE -->
+            <div id="errorMessage" class="error-message"></div>
+            <div id="successMessage" class="success-message"></div>
 
-        <!-- LANDING PAGE -->
-        <div id="landing" class="page active">
-            <div class="landing">
-                <div class="hero">
-                    <div class="hero-icon">
-                        <i class="fas fa-tasks"></i>
+            <!-- LANDING PAGE -->
+            <div id="landing" class="page active">
+                <div class="landing">
+                    <div class="hero">
+                        <div class="hero-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h1>Activity Tracker</h1>
+                        <p>NAIROBI WATER REGULATED NWDT SACCO SOCIETY LIMITED</p>
+                        <div class="cta-buttons">
+                            <button class="btn btn-primary" onclick="navigateTo('dashboard')">
+                                <i class="fas fa-chart-bar"></i> Dashboard
+                            </button>
+                            <button class="btn btn-secondary" onclick="navigateTo('add-task')">
+                                <i class="fas fa-plus"></i> Add Task
+                            </button>
+                        </div>
                     </div>
-                    <h1>Activity Tracker</h1>
-                    <p>NAIROBI WATER REGULATED NWDT SACCO SOCIETY LIMITED</p>
-                    <div class="cta-buttons">
-                        <button class="btn btn-primary" onclick="navigateTo('dashboard')">
-                            <i class="fas fa-chart-bar"></i> Dashboard
-                        </button>
-                        <button class="btn btn-secondary" onclick="navigateTo('add-task')">
-                            <i class="fas fa-plus"></i> Add Task
-                        </button>
+
+                    <div class="features">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                            <h3>Real-Time Sync</h3>
+                            <p>Updates automatically without page refresh.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Officer Dashboards</h3>
+                            <p>Personalized tracking for each officer.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <h3>Performance Tracking</h3>
+                            <p>Monitor completion rates visually.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h3>Deadline Management</h3>
+                            <p>Clear visibility on task deadlines.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <h3>Export Reports</h3>
+                            <p>Download data in CSV format.</p>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Secure & Reliable</h3>
+                            <p>Safe storage with real-time access.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DASHBOARD PAGE -->
+            <div id="dashboard" class="page">
+                <div class="dashboard-header">
+                    <div class="welcome-text">
+                        <i class="fas fa-tachometer-alt" style="color: var(--ocean-blue); margin-right: 6px;"></i>
+                        Activity Dashboard
+                    </div>
+                    <div class="welcome-subtitle">Monitor all tasks in real-time</div>
+                </div>
+
+                <!-- OVERALL STATS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-tasks"></i></div>
+                        <div class="stat-label">Total</div>
+                        <div class="stat-value" id="totalTasks">0</div>
+                    </div>
+
+                    <div class="stat-card completed">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-label">Done</div>
+                        <div class="stat-value" id="completedTasks">0</div>
+                    </div>
+
+                    <div class="stat-card pending">
+                        <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="stat-label">Pending</div>
+                        <div class="stat-value" id="pendingTasks">0</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-percentage"></i></div>
+                        <div class="stat-label">Rate</div>
+                        <div class="stat-value" id="completionRate">0%</div>
                     </div>
                 </div>
 
-                <div class="features">
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-sync-alt"></i>
+                <!-- OFFICERS SECTION -->
+                <div class="officers-section">
+                    <div class="section-title">
+                        <i class="fas fa-users-cog"></i>
+                        Officers Performance
+                    </div>
+                    <div class="officers-grid" id="officersGrid">
+                        <div class="loading">
+                            <i class="fas fa-spinner"></i><br>Loading...
                         </div>
-                        <h3>Real-Time Sync</h3>
-                        <p>Updates automatically without page refresh.</p>
+                    </div>
+                </div>
+
+                <!-- TASKS SECTION -->
+                <div class="tasks-section">
+                    <div class="section-title">
+                        <i class="fas fa-list-check"></i>
+                        All Tasks
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-users"></i>
+                    <div class="controls">
+                        <div class="filter-group">
+                            <label for="departmentFilter">
+                                <i class="fas fa-filter"></i> Dept:
+                            </label>
+                            <select id="departmentFilter" onchange="renderDashboard()">
+                                <option value="">All</option>
+                            </select>
                         </div>
-                        <h3>Officer Dashboards</h3>
-                        <p>Personalized tracking for each officer.</p>
+
+                        <div class="filter-group">
+                            <label for="statusFilter">Status:</label>
+                            <select id="statusFilter" onchange="renderDashboard()">
+                                <option value="">All</option>
+                                <option value="completed">Done</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-primary" onclick="exportToCSV()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-pie"></i>
+                    <div class="table-wrapper">
+                        <div id="loading" class="loading">
+                            <i class="fas fa-spinner"></i><br>Loading...
                         </div>
-                        <h3>Performance Tracking</h3>
-                        <p>Monitor completion rates visually.</p>
+                        <table id="taskTable" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35px;"><i class="fas fa-check"></i></th>
+                                    <th>Officer/Dept</th>
+                                    <th>Action</th>
+                                    <th>Deadline</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tasksBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ADD TASK PAGE -->
+            <div id="add-task" class="page">
+                <div class="form-container">
+                    <div class="form-title">
+                        <i class="fas fa-plus-circle"></i>
+                        Add Task
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-calendar-check"></i>
+                    <form id="addTaskForm" onsubmit="addNewTask(event)">
+                        <div class="form-group">
+                            <label for="newOfficer">
+                                <i class="fas fa-user"></i> Officer
+                            </label>
+                            <select id="newOfficer" onchange="toggleCustomOfficer()" required>
+                                <option value="">-- Select --</option>
+                                <option value="CEO">CEO</option>
+                                <option value="Nickson">Nickson (Finance)</option>
+                                <option value="Raymond">Raymond (Credit)</option>
+                                <option value="Naomi">Naomi (Marketing)</option>
+                                <option value="Canton">Canton (ICT)</option>
+                                <option value="BDO">BDO</option>
+                                <option value="Custom">Custom</option>
+                            </select>
                         </div>
-                        <h3>Deadline Management</h3>
-                        <p>Clear visibility on task deadlines.</p>
-                    </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-download"></i>
+                        <div class="form-group" id="customOfficerGroup" style="display: none;">
+                            <label for="customOfficer">Officer Name</label>
+                            <input type="text" id="customOfficer" placeholder="Enter name">
                         </div>
-                        <h3>Export Reports</h3>
-                        <p>Download data in CSV format.</p>
-                    </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">
-                            <i class="fas fa-shield-alt"></i>
+                        <div class="form-group">
+                            <label for="newDepartment">
+                                <i class="fas fa-building"></i> Department
+                            </label>
+                            <input type="text" id="newDepartment" placeholder="Department" required>
                         </div>
-                        <h3>Secure & Reliable</h3>
-                        <p>Safe storage with real-time access.</p>
-                    </div>
+
+                        <div class="form-group">
+                            <label for="newAction">
+                                <i class="fas fa-clipboard-list"></i> Action Item
+                            </label>
+                            <textarea id="newAction" placeholder="Describe task..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="newDeadline">
+                                <i class="fas fa-calendar-alt"></i> Deadline
+                            </label>
+                            <input type="date" id="newDeadline" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Add
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="resetAddForm()">
+                                <i class="fas fa-redo"></i> Clear
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="navigateTo('dashboard')">
+                                <i class="fas fa-arrow-left"></i> Back
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </main>
 
-        <!-- DASHBOARD PAGE -->
-        <div id="dashboard" class="page">
-            <div class="dashboard-header">
-                <div class="welcome-text">
-                    <i class="fas fa-tachometer-alt" style="color: var(--ocean-blue); margin-right: 6px;"></i>
-                    Activity Dashboard
-                </div>
-                <div class="welcome-subtitle">Monitor all tasks in real-time</div>
-            </div>
-
-            <!-- OVERALL STATS -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-tasks"></i></div>
-                    <div class="stat-label">Total</div>
-                    <div class="stat-value" id="totalTasks">0</div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <!-- About Section -->
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-water"></i> About NWDT SACCO
+                    </h3>
+                    <p>NAIROBI WATER REGULATED NWDT SACCO SOCIETY LIMITED is committed to providing excellent services and promoting financial stability for our members.</p>
+                    <p>📍 Nairobi, Kenya</p>
                 </div>
 
-                <div class="stat-card completed">
-                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
-                    <div class="stat-label">Done</div>
-                    <div class="stat-value" id="completedTasks">0</div>
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-link"></i> Quick Links
+                    </h3>
+                    <ul>
+                        <li><a onclick="navigateTo('landing')">Home</a></li>
+                        <li><a onclick="navigateTo('dashboard')">Dashboard</a></li>
+                        <li><a onclick="navigateTo('add-task')">Add Task</a></li>
+                        <li><a onclick="alert('Feature coming soon!')">Reports</a></li>
+                    </ul>
                 </div>
 
-                <div class="stat-card pending">
-                    <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
-                    <div class="stat-label">Pending</div>
-                    <div class="stat-value" id="pendingTasks">0</div>
+                <!-- Features -->
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-star"></i> Features
+                    </h3>
+                    <ul>
+                        <li>Real-Time Sync</li>
+                        <li>Performance Tracking</li>
+                        <li>Deadline Management</li>
+                        <li>Export Reports</li>
+                        <li>Mobile Responsive</li>
+                        <li>Secure & Reliable</li>
+                    </ul>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="fas fa-percentage"></i></div>
-                    <div class="stat-label">Rate</div>
-                    <div class="stat-value" id="completionRate">0%</div>
-                </div>
-            </div>
-
-            <!-- OFFICERS SECTION -->
-            <div class="officers-section">
-                <div class="section-title">
-                    <i class="fas fa-users-cog"></i>
-                    Officers Performance
-                </div>
-                <div class="officers-grid" id="officersGrid">
-                    <div class="loading">
-                        <i class="fas fa-spinner"></i><br>Loading...
+                <!-- Contact & Support -->
+                <div class="footer-section">
+                    <h3>
+                        <i class="fas fa-headset"></i> Support
+                    </h3>
+                    <p>
+                        <i class="fas fa-envelope"></i><br>
+                        Email: info@nwdtsacco.co.ke
+                    </p>
+                    <p>
+                        <i class="fas fa-phone"></i><br>
+                        Phone: +254 20 XXXX XXXX
+                    </p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- TASKS SECTION -->
-            <div class="tasks-section">
-                <div class="section-title">
-                    <i class="fas fa-list-check"></i>
-                    All Tasks
+            <div class="footer-divider"></div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>&copy; 2024 NAIROBI WATER REGULATED NWDT SACCO SOCIETY LIMITED. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
                 </div>
-
-                <div class="controls">
-                    <div class="filter-group">
-                        <label for="departmentFilter">
-                            <i class="fas fa-filter"></i> Dept:
-                        </label>
-                        <select id="departmentFilter" onchange="renderDashboard()">
-                            <option value="">All</option>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label for="statusFilter">Status:</label>
-                        <select id="statusFilter" onchange="renderDashboard()">
-                            <option value="">All</option>
-                            <option value="completed">Done</option>
-                            <option value="pending">Pending</option>
-                        </select>
-                    </div>
-
-                    <button class="btn btn-primary" onclick="exportToCSV()">
-                        <i class="fas fa-download"></i> Export
-                    </button>
-                </div>
-
-                <div class="table-wrapper">
-                    <div id="loading" class="loading">
-                        <i class="fas fa-spinner"></i><br>Loading...
-                    </div>
-                    <table id="taskTable" style="display: none;">
-                        <thead>
-                            <tr>
-                                <th style="width: 35px;"><i class="fas fa-check"></i></th>
-                                <th>Officer/Dept</th>
-                                <th>Action</th>
-                                <th>Deadline</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tasksBody"></tbody>
-                    </table>
-                </div>
+                <p>Designed by <strong>Your Development Team</strong></p>
             </div>
         </div>
-
-        <!-- ADD TASK PAGE -->
-        <div id="add-task" class="page">
-            <div class="form-container">
-                <div class="form-title">
-                    <i class="fas fa-plus-circle"></i>
-                    Add Task
-                </div>
-
-                <form id="addTaskForm" onsubmit="addNewTask(event)">
-                    <div class="form-group">
-                        <label for="newOfficer">
-                            <i class="fas fa-user"></i> Officer
-                        </label>
-                        <select id="newOfficer" onchange="toggleCustomOfficer()" required>
-                            <option value="">-- Select --</option>
-                            <option value="CEO">CEO</option>
-                            <option value="Nickson">Nickson (Finance)</option>
-                            <option value="Raymond">Raymond (Credit)</option>
-                            <option value="Naomi">Naomi (Marketing)</option>
-                            <option value="Canton">Canton (ICT)</option>
-                            <option value="BDO">BDO</option>
-                            <option value="Custom">Custom</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group" id="customOfficerGroup" style="display: none;">
-                        <label for="customOfficer">Officer Name</label>
-                        <input type="text" id="customOfficer" placeholder="Enter name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newDepartment">
-                            <i class="fas fa-building"></i> Department
-                        </label>
-                        <input type="text" id="newDepartment" placeholder="Department" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newAction">
-                            <i class="fas fa-clipboard-list"></i> Action Item
-                        </label>
-                        <textarea id="newAction" placeholder="Describe task..." required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newDeadline">
-                            <i class="fas fa-calendar-alt"></i> Deadline
-                        </label>
-                        <input type="date" id="newDeadline" required>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Add
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="resetAddForm()">
-                            <i class="fas fa-redo"></i> Clear
-                        </button>
-                        <button type="button" class="btn btn-secondary" onclick="navigateTo('dashboard')">
-                            <i class="fas fa-arrow-left"></i> Back
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    </footer>
 
     <!-- EDIT MODAL -->
     <div id="editModal" class="modal">
