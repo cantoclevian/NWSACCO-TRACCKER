@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activity Tracker Pro - Real-Time Sync</title>
+    <title>NWDT SACCO - Activity Tracker Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -12,223 +13,468 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-dark: #003d7a;
+            --primary-blue: #0066cc;
+            --ocean-blue: #0088ff;
+            --light-blue: #e6f2ff;
+            --white: #ffffff;
+            --gray-dark: #2c3e50;
+            --gray-light: #ecf0f1;
+            --gray-medium: #95a5a6;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: #333;
+            font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+            background: var(--gray-light);
+            color: var(--gray-dark);
+            transition: all 0.3s ease;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
             color: white;
-            padding: 40px 30px;
-            text-align: center;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 61, 122, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3em;
             font-weight: 700;
         }
 
-        .subtitle {
-            font-size: 1.1em;
-            opacity: 0.9;
-            font-weight: 300;
+        .navbar-logo i {
+            font-size: 1.8em;
+            color: var(--ocean-blue);
         }
 
-        .status-badge-header {
-            display: inline-block;
-            background: rgba(76, 175, 80, 0.3);
-            color: #4caf50;
-            padding: 8px 16px;
+        .navbar-right {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .user-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
             border-radius: 20px;
-            font-weight: 600;
-            margin-top: 10px;
             font-size: 0.9em;
         }
 
-        .tabs {
-            display: flex;
-            gap: 0;
-            background: #f0f0f0;
-            border-bottom: 2px solid #ddd;
-            padding: 0 30px;
-            overflow-x: auto;
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 30px 20px;
         }
 
-        .tab-btn {
-            padding: 15px 25px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 600;
-            color: #666;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-            white-space: nowrap;
-        }
-
-        .tab-btn:hover {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-
-        .tab-btn.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-
-        .tab-content {
+        .page {
             display: none;
-        }
-
-        .tab-content.active {
-            display: block;
             animation: fadeIn 0.3s;
         }
 
+        .page.active {
+            display: block;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* LANDING PAGE */
+        .landing {
+            text-align: center;
+            padding: 60px 30px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 15px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 30px rgba(0, 61, 122, 0.2);
+        }
+
+        .hero-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            color: var(--ocean-blue);
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 136, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--light-blue);
+            color: var(--primary-dark);
+        }
+
+        .btn-secondary:hover {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s;
+            border-top: 4px solid var(--ocean-blue);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 136, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            color: var(--ocean-blue);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .feature-card p {
+            color: var(--gray-medium);
+            line-height: 1.6;
+        }
+
+        /* DASHBOARD PAGE */
+        .dashboard-header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .welcome-text {
+            color: var(--primary-dark);
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .welcome-subtitle {
+            color: var(--gray-medium);
+            font-size: 1em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--ocean-blue);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 136, 255, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 2.5em;
+            color: var(--ocean-blue);
+            margin-bottom: 12px;
+        }
+
+        .stat-label {
+            color: var(--gray-medium);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .stat-card.completed .stat-value {
+            color: var(--success);
+        }
+
+        .stat-card.pending .stat-value {
+            color: var(--warning);
+        }
+
+        /* OFFICERS SECTION */
+        .officers-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            color: var(--primary-dark);
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--ocean-blue);
+            font-size: 1.4em;
+        }
+
+        .officers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .officer-card {
+            background: linear-gradient(135deg, var(--light-blue) 0%, rgba(0, 136, 255, 0.05) 100%);
+            border: 2px solid var(--light-blue);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .officer-card:hover {
+            border-color: var(--ocean-blue);
+            box-shadow: 0 8px 25px rgba(0, 136, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .officer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--ocean-blue));
+        }
+
+        .officer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--ocean-blue));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .officer-name {
+            color: var(--primary-dark);
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .officer-title {
+            color: var(--ocean-blue);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .target-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .target-label {
+            color: var(--gray-medium);
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .target-value {
+            color: var(--primary-dark);
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            background: var(--gray-light);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), var(--ocean-blue));
+            transition: width 0.3s;
+            border-radius: 5px;
+        }
+
+        .task-count {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .count-item {
+            text-align: center;
+        }
+
+        .count-number {
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--ocean-blue);
+        }
+
+        .count-label {
+            color: var(--gray-medium);
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* TASKS SECTION */
+        .tasks-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .controls {
             display: flex;
-            gap: 20px;
-            padding: 30px;
-            background: #f8f9fa;
+            gap: 15px;
+            margin-bottom: 25px;
             flex-wrap: wrap;
             align-items: center;
-            border-bottom: 1px solid #e0e0e0;
         }
 
-        .filter-section {
+        .filter-group {
             display: flex;
             gap: 10px;
             align-items: center;
         }
 
-        .filter-section label {
+        .filter-group label {
+            color: var(--primary-dark);
             font-weight: 600;
-            color: #555;
             white-space: nowrap;
         }
 
-        .filter-section select {
+        select, input {
             padding: 10px 15px;
-            border: 1px solid #ddd;
+            border: 2px solid var(--light-blue);
             border-radius: 6px;
-            font-size: 1em;
-            background: white;
-            cursor: pointer;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-            font-weight: 600;
+            font-size: 0.95em;
             transition: all 0.3s;
+            color: var(--gray-dark);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-secondary {
-            background: #e0e0e0;
-            color: #333;
-        }
-
-        .btn-secondary:hover {
-            background: #d0d0d0;
-        }
-
-        .btn-danger {
-            background: #ff6b6b;
-            color: white;
-            padding: 6px 12px;
-            font-size: 0.85em;
-        }
-
-        .btn-danger:hover {
-            background: #ff5252;
-        }
-
-        .btn-edit {
-            background: #4ecdc4;
-            color: white;
-            padding: 6px 12px;
-            font-size: 0.85em;
-        }
-
-        .btn-edit:hover {
-            background: #3ab8af;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            padding: 30px;
-            background: #f8f9fa;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .stat-label {
-            font-size: 0.9em;
-            color: #999;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 2em;
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .stat-value.completed {
-            color: #4caf50;
-        }
-
-        .stat-value.pending {
-            color: #ff9800;
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 3px rgba(0, 136, 255, 0.1);
         }
 
         .table-wrapper {
             overflow-x: auto;
-            padding: 30px;
         }
 
         table {
@@ -237,32 +483,28 @@
         }
 
         thead {
-            background: #f0f0f0;
-            border-bottom: 2px solid #ddd;
+            background: linear-gradient(135deg, var(--light-blue) 0%, rgba(0, 136, 255, 0.05) 100%);
         }
 
         th {
             padding: 15px;
             text-align: left;
             font-weight: 700;
-            color: #555;
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--ocean-blue);
         }
 
         tbody tr {
-            border-bottom: 1px solid #eee;
-            transition: background-color 0.2s;
+            border-bottom: 1px solid var(--gray-light);
+            transition: all 0.2s;
         }
 
         tbody tr:hover {
-            background-color: #f9f9f9;
+            background: var(--light-blue);
         }
 
         tbody tr.completed {
-            background-color: #f0f8f0;
-        }
-
-        tbody tr.completed td {
-            opacity: 0.7;
+            background: rgba(39, 174, 96, 0.05);
         }
 
         td {
@@ -274,35 +516,40 @@
         }
 
         input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             cursor: pointer;
-            accent-color: #667eea;
+            accent-color: var(--ocean-blue);
         }
 
-        .task-item.completed {
+        .task-name {
+            font-weight: 600;
+            color: var(--gray-dark);
+        }
+
+        .task-name.completed {
             text-decoration: line-through;
-            color: #999;
+            color: var(--gray-medium);
         }
 
-        .status-badge {
+        .badge {
             display: inline-block;
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 0.85em;
             font-weight: 600;
             text-align: center;
-            min-width: 80px;
+            min-width: 90px;
         }
 
-        .status-badge.completed {
-            background: #e8f5e9;
-            color: #2e7d32;
+        .badge.done {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success);
         }
 
-        .status-badge.pending {
-            background: #fff3e0;
-            color: #e65100;
+        .badge.pending {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--warning);
         }
 
         .action-buttons {
@@ -310,51 +557,98 @@
             gap: 8px;
         }
 
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-edit {
+            background: rgba(0, 136, 255, 0.1);
+            color: var(--ocean-blue);
+        }
+
+        .btn-edit:hover {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .btn-delete {
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+        }
+
+        .btn-delete:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* FORMS */
         .form-container {
+            background: white;
             padding: 40px;
-            max-width: 600px;
+            border-radius: 12px;
+            max-width: 700px;
             margin: 0 auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .form-container h2 {
+        .form-title {
+            color: var(--primary-dark);
+            font-size: 1.8em;
+            font-weight: 700;
             margin-bottom: 30px;
-            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .task-form {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 8px;
+        .form-title i {
+            color: var(--ocean-blue);
+            font-size: 1.5em;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: var(--primary-dark);
         }
 
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 12px 15px;
+            border: 2px solid var(--light-blue);
+            border-radius: 8px;
             font-size: 1em;
             font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--ocean-blue);
+            box-shadow: 0 0 0 3px rgba(0, 136, 255, 0.1);
         }
 
         .form-actions {
@@ -367,22 +661,7 @@
             flex: 1;
         }
 
-        .sync-notice {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 10px 20px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 500;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
@@ -394,6 +673,7 @@
             background-color: rgba(0, 0, 0, 0.5);
             align-items: center;
             justify-content: center;
+            animation: fadeIn 0.3s;
         }
 
         .modal.active {
@@ -401,68 +681,101 @@
         }
 
         .modal-content {
-            background-color: white;
+            background: white;
             padding: 30px;
             border-radius: 12px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             position: relative;
         }
 
         .modal-close {
             position: absolute;
-            right: 15px;
-            top: 15px;
+            right: 20px;
+            top: 20px;
             font-size: 28px;
-            font-weight: bold;
-            color: #aaa;
             cursor: pointer;
+            color: var(--gray-medium);
+            transition: color 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-close:hover {
-            color: #000;
+            color: var(--primary-dark);
         }
 
-        .footer {
-            padding: 20px 30px;
-            background: #f8f9fa;
-            border-top: 1px solid #e0e0e0;
-            text-align: center;
-        }
-
-        .footer p {
-            color: #666;
-            font-size: 0.9em;
-        }
-
+        /* LOADING & ERROR */
         .loading {
             text-align: center;
-            padding: 40px;
-            color: #667eea;
+            padding: 60px 30px;
+            color: var(--ocean-blue);
             font-weight: 600;
         }
 
+        .loading i {
+            font-size: 2em;
+            margin-bottom: 15px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .error-message {
-            background: #ffebee;
-            color: #c62828;
-            padding: 15px;
-            border-radius: 4px;
-            margin: 20px;
+            background: rgba(231, 76, 60, 0.1);
+            color: var(--danger);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--danger);
             display: none;
         }
 
+        .success-message {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--success);
+            display: none;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            header h1 {
+            .hero {
+                padding: 40px 20px;
+            }
+
+            .hero h1 {
                 font-size: 1.8em;
             }
 
-            .action-buttons {
+            .hero p {
+                font-size: 1em;
+            }
+
+            .officers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
                 flex-direction: column;
             }
 
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
+            .cta-buttons .btn {
+                width: 100%;
             }
 
             table {
@@ -470,137 +783,233 @@
             }
 
             th, td {
-                padding: 10px 8px;
+                padding: 10px;
+            }
+
+            .form-container {
+                padding: 20px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <i class="fas fa-water"></i>
+            <span>NWDT SACCO</span>
+        </div>
+        <div class="navbar-right">
+            <span class="user-badge" id="userBadge">Welcome</span>
+            <button class="btn btn-secondary btn-small" onclick="navigateTo('landing')">
+                <i class="fas fa-home"></i> Home
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
     <div class="container">
-        <header>
-            <h1>📋 Activity Tracker Pro</h1>
-            <p class="subtitle">Real-time shared tracking for your organization</p>
-            <div class="status-badge-header">🔄 Real-Time Sync Enabled</div>
-        </header>
-
+        <!-- ERROR MESSAGE -->
         <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
-            <button class="tab-btn" onclick="switchTab('tasks')">📝 All Tasks</button>
-            <button class="tab-btn" onclick="switchTab('add-task')">➕ Add New Task</button>
-        </div>
-
-        <!-- DASHBOARD TAB -->
-        <div id="dashboard" class="tab-content active">
-            <div class="sync-notice">
-                ✨ All team members see updates in real-time!
-            </div>
-
-            <div class="controls">
-                <div class="filter-section">
-                    <label for="departmentFilter">Filter by Department:</label>
-                    <select id="departmentFilter" onchange="renderDashboard()">
-                        <option value="">All Departments</option>
-                    </select>
+        <!-- LANDING PAGE -->
+        <div id="landing" class="page active">
+            <div class="landing">
+                <div class="hero">
+                    <div class="hero-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h1>Activity Tracker Pro</h1>
+                    <p>Streamline task management and boost productivity for NWDT SACCO</p>
+                    <div class="cta-buttons">
+                        <button class="btn btn-primary" onclick="navigateTo('dashboard')">
+                            <i class="fas fa-chart-bar"></i> Go to Dashboard
+                        </button>
+                        <button class="btn btn-secondary" onclick="navigateTo('add-task')">
+                            <i class="fas fa-plus"></i> Add New Task
+                        </button>
+                    </div>
                 </div>
 
-                <div class="filter-section">
-                    <label for="statusFilter">Filter by Status:</label>
-                    <select id="statusFilter" onchange="renderDashboard()">
-                        <option value="">All Tasks</option>
-                        <option value="completed">Completed ✓</option>
-                        <option value="pending">Pending</option>
-                    </select>
-                </div>
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Real-Time Sync</h3>
+                        <p>Updates automatically without page refresh. See changes instantly across all devices.</p>
+                    </div>
 
-                <button class="btn btn-primary" onclick="exportToCSV()">📥 Export to CSV</button>
-            </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Individual Dashboards</h3>
+                        <p>Each officer has a personalized dashboard showing their targets and performance.</p>
+                    </div>
 
-            <div class="stats">
-                <div class="stat-card">
-                    <span class="stat-label">Total Tasks</span>
-                    <span class="stat-value" id="totalTasks">0</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label">Completed</span>
-                    <span class="stat-value completed" id="completedTasks">0</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label">Pending</span>
-                    <span class="stat-value pending" id="pendingTasks">0</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label">Completion Rate</span>
-                    <span class="stat-value" id="completionRate">0%</span>
-                </div>
-            </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Performance Tracking</h3>
+                        <p>Monitor completion rates and progress with visual indicators and statistics.</p>
+                    </div>
 
-            <div class="table-wrapper">
-                <div id="loading" class="loading">⏳ Loading tasks...</div>
-                <table id="taskTable" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th>✓</th>
-                            <th>Department / Officer</th>
-                            <th>Action Item</th>
-                            <th>Deadline</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tasksBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h3>Deadline Management</h3>
+                        <p>Set deadlines and stay on track with clear visibility on what's due.</p>
+                    </div>
 
-        <!-- ALL TASKS TAB -->
-        <div id="tasks" class="tab-content">
-            <div class="controls">
-                <button class="btn btn-secondary" onclick="clearCompleted()">🗑️ Clear All Completed</button>
-                <button class="btn btn-secondary" onclick="resetAllTasks()">🔄 Reset All Tasks</button>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>✓</th>
-                            <th>Department / Officer</th>
-                            <th>Action Item</th>
-                            <th>Deadline</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="allTasksBody">
-                    </tbody>
-                </table>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h3>Export Reports</h3>
+                        <p>Download task data in CSV format for reporting and analysis.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure & Reliable</h3>
+                        <p>Your data is safely stored and accessible anytime, anywhere.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- ADD NEW TASK TAB -->
-        <div id="add-task" class="tab-content">
+        <!-- DASHBOARD PAGE -->
+        <div id="dashboard" class="page">
+            <div class="dashboard-header">
+                <div class="welcome-text">
+                    <i class="fas fa-tachometer-alt" style="color: var(--ocean-blue); margin-right: 12px;"></i>
+                    Activity Dashboard
+                </div>
+                <div class="welcome-subtitle">Monitor all tasks and officer performance in real-time</div>
+            </div>
+
+            <!-- OVERALL STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="stat-label">Total Tasks</div>
+                    <div class="stat-value" id="totalTasks">0</div>
+                </div>
+
+                <div class="stat-card completed">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-label">Completed</div>
+                    <div class="stat-value" id="completedTasks">0</div>
+                </div>
+
+                <div class="stat-card pending">
+                    <div class="stat-icon">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="stat-label">Pending</div>
+                    <div class="stat-value" id="pendingTasks">0</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="stat-label">Completion Rate</div>
+                    <div class="stat-value" id="completionRate">0%</div>
+                </div>
+            </div>
+
+            <!-- OFFICERS SECTION -->
+            <div class="officers-section">
+                <div class="section-title">
+                    <i class="fas fa-users-cog"></i>
+                    Officers Performance
+                </div>
+                <div class="officers-grid" id="officersGrid">
+                    <div class="loading">
+                        <i class="fas fa-spinner"></i><br>Loading officers...
+                    </div>
+                </div>
+            </div>
+
+            <!-- TASKS SECTION -->
+            <div class="tasks-section">
+                <div class="section-title">
+                    <i class="fas fa-list-check"></i>
+                    All Tasks
+                </div>
+
+                <div class="controls">
+                    <div class="filter-group">
+                        <label for="departmentFilter">
+                            <i class="fas fa-filter" style="margin-right: 8px;"></i>Department:
+                        </label>
+                        <select id="departmentFilter" onchange="renderDashboard()">
+                            <option value="">All Departments</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="statusFilter">Status:</label>
+                        <select id="statusFilter" onchange="renderDashboard()">
+                            <option value="">All Tasks</option>
+                            <option value="completed">Completed ✓</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="exportToCSV()">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+
+                <div class="table-wrapper">
+                    <div id="loading" class="loading">
+                        <i class="fas fa-spinner"></i><br>Loading tasks...
+                    </div>
+                    <table id="taskTable" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th style="width: 50px;">
+                                    <i class="fas fa-check"></i>
+                                </th>
+                                <th>Officer / Department</th>
+                                <th>Action Item</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th style="width: 120px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tasksBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD TASK PAGE -->
+        <div id="add-task" class="page">
             <div class="form-container">
-                <h2>➕ Add New Task</h2>
-                <form id="addTaskForm" class="task-form" onsubmit="addNewTask(event)">
-                    <div class="form-group">
-                        <label for="newDepartment">Department / Officer Name:</label>
-                        <input type="text" id="newDepartment" placeholder="e.g., Finance / Nickson" required>
-                    </div>
+                <div class="form-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Add New Task
+                </div>
 
+                <form id="addTaskForm" onsubmit="addNewTask(event)">
                     <div class="form-group">
-                        <label for="newAction">Action Item Description:</label>
-                        <textarea id="newAction" placeholder="Describe the task in detail..." rows="4" required></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newDeadline">Deadline (Date):</label>
-                        <input type="date" id="newDeadline" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="newOfficer">Assign to Officer:</label>
+                        <label for="newOfficer">
+                            <i class="fas fa-user"></i> Assign to Officer
+                        </label>
                         <select id="newOfficer" onchange="toggleCustomOfficer()" required>
                             <option value="">-- Select Officer --</option>
                             <option value="CEO">CEO</option>
@@ -614,49 +1023,83 @@
                     </div>
 
                     <div class="form-group" id="customOfficerGroup" style="display: none;">
-                        <label for="customOfficer">Custom Officer Name:</label>
+                        <label for="customOfficer">Custom Officer Name</label>
                         <input type="text" id="customOfficer" placeholder="Enter officer name">
                     </div>
 
+                    <div class="form-group">
+                        <label for="newDepartment">
+                            <i class="fas fa-building"></i> Department
+                        </label>
+                        <input type="text" id="newDepartment" placeholder="e.g., Finance, Credit, Marketing" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newAction">
+                            <i class="fas fa-clipboard-list"></i> Action Item Description
+                        </label>
+                        <textarea id="newAction" placeholder="Describe the task in detail..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newDeadline">
+                            <i class="fas fa-calendar-alt"></i> Deadline
+                        </label>
+                        <input type="date" id="newDeadline" required>
+                    </div>
+
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">✅ Add Task</button>
-                        <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Add Task
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetAddForm()">
+                            <i class="fas fa-redo"></i> Clear
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="navigateTo('dashboard')">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
-
-        <div class="footer">
-            <p>Last updated: <span id="lastUpdated">Now</span></p>
-        </div>
     </div>
 
-    <!-- Edit Modal -->
+    <!-- EDIT MODAL -->
     <div id="editModal" class="modal">
         <div class="modal-content">
-            <span class="modal-close" onclick="closeEditModal()">&times;</span>
-            <h2>Edit Task</h2>
-            <form id="editTaskForm" class="task-form" onsubmit="saveEditedTask(event)">
+            <span class="modal-close" onclick="closeEditModal()">
+                <i class="fas fa-times"></i>
+            </span>
+            <div class="form-title" style="margin-bottom: 20px;">
+                <i class="fas fa-edit"></i>
+                Edit Task
+            </div>
+
+            <form id="editTaskForm" onsubmit="saveEditedTask(event)">
                 <div class="form-group">
-                    <label for="editDepartment">Department / Officer:</label>
+                    <label for="editDepartment">Department</label>
                     <input type="text" id="editDepartment" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="editAction">Action Item:</label>
-                    <textarea id="editAction" rows="4" required></textarea>
+                    <label for="editAction">Action Item</label>
+                    <textarea id="editAction" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="editDeadline">Deadline:</label>
+                    <label for="editDeadline">Deadline</label>
                     <input type="date" id="editDeadline" required>
                 </div>
 
                 <input type="hidden" id="editTaskId">
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">💾 Save Changes</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
                 </div>
             </form>
         </div>
@@ -664,7 +1107,6 @@
 
     <script>
         // ===== SUPABASE CONFIGURATION =====
-        // REPLACE THESE WITH YOUR SUPABASE DETAILS
         const SUPABASE_URL = "https://ruymrwmfeomkgxxbssvx.supabase.co";
         const SUPABASE_ANON_KEY = "sb_publishable_AggWRvBNdxzK5dKQWMJY0w_JRY3BjHY";
 
@@ -701,6 +1143,24 @@
             { department: "General Administration", officer: "CEO", action: "Place a notice at the reception guiding members to respect staff.", deadline: "2026-07-15", completed: false }
         ];
 
+        const officerTargets = {
+            "CEO": 5,
+            "Nickson": 4,
+            "Raymond": 5,
+            "Naomi": 4,
+            "Canton": 2,
+            "BDO": 2
+        };
+
+        const officerIcons = {
+            "CEO": "👨‍💼",
+            "Nickson": "💰",
+            "Raymond": "💳",
+            "Naomi": "📢",
+            "Canton": "💻",
+            "BDO": "📊"
+        };
+
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
             initializeApp();
@@ -710,7 +1170,6 @@
             try {
                 console.log('Initializing app...');
                 
-                // Check if table is empty
                 const { data: existingData, error: checkError } = await supabaseClient
                     .from('tasks')
                     .select('*')
@@ -718,7 +1177,6 @@
 
                 if (checkError) throw checkError;
 
-                // If empty, insert initial tasks
                 if (existingData && existingData.length === 0) {
                     console.log('Inserting initial tasks...');
                     for (let task of initialTasks) {
@@ -726,12 +1184,8 @@
                     }
                 }
 
-                // Load tasks
                 await loadTasks();
-                
-                // Setup real-time listener
                 setupRealtimeListener();
-                
                 console.log('App initialized successfully!');
                 
             } catch (error) {
@@ -752,9 +1206,7 @@
                         loadTasks();
                     }
                 )
-                .subscribe((status) => {
-                    console.log('Subscription status:', status);
-                });
+                .subscribe();
         }
 
         async function loadTasks() {
@@ -770,9 +1222,9 @@
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('taskTable').style.display = 'table';
                 renderDashboard();
+                renderOfficersCards();
                 populateDepartmentFilter();
                 updateStats();
-                updateLastUpdated();
                 console.log('Tasks loaded:', tasks.length);
             } catch (error) {
                 console.error('Load error:', error);
@@ -780,22 +1232,13 @@
             }
         }
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
-        }
-
         function renderDashboard() {
             const tbody = document.getElementById('tasksBody');
             const allTasksBody = document.getElementById('allTasksBody');
             
-            if (!tbody || !allTasksBody) return;
+            if (!tbody) return;
             
             tbody.innerHTML = '';
-            allTasksBody.innerHTML = '';
             
             const departmentFilter = document.getElementById('departmentFilter')?.value || '';
             const statusFilter = document.getElementById('statusFilter')?.value || '';
@@ -815,10 +1258,6 @@
             filtered.forEach(task => {
                 tbody.appendChild(createTaskRow(task));
             });
-            
-            tasks.forEach(task => {
-                allTasksBody.appendChild(createTaskRow(task));
-            });
         }
 
         function createTaskRow(task) {
@@ -832,21 +1271,81 @@
                 <td class="checkbox-container">
                     <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTask(${task.id})">
                 </td>
-                <td><strong>${task.department}</strong><br><small>${task.officer}</small></td>
-                <td class="task-item ${task.completed ? 'completed' : ''}">${task.action}</td>
+                <td>
+                    <strong>${task.officer}</strong><br>
+                    <small>${task.department}</small>
+                </td>
+                <td class="task-name ${task.completed ? 'completed' : ''}">${task.action}</td>
                 <td>${dateStr}</td>
                 <td>
-                    <span class="status-badge ${task.completed ? 'completed' : 'pending'}">
+                    <span class="badge ${task.completed ? 'done' : 'pending'}">
                         ${task.completed ? '✓ Done' : '⏳ Pending'}
                     </span>
                 </td>
                 <td class="action-buttons">
-                    <button class="btn btn-edit" onclick="openEditModal(${task.id})">✏️</button>
-                    <button class="btn btn-danger" onclick="deleteTask(${task.id})">🗑️</button>
+                    <button class="btn-icon btn-edit" onclick="openEditModal(${task.id})" title="Edit">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-icon btn-delete" onclick="deleteTask(${task.id})" title="Delete">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </td>
             `;
             
             return row;
+        }
+
+        function renderOfficersCards() {
+            const grid = document.getElementById('officersGrid');
+            grid.innerHTML = '';
+
+            const officers = [...new Set(tasks.map(t => t.officer))].sort();
+
+            officers.forEach(officer => {
+                const officerTasks = tasks.filter(t => t.officer === officer);
+                const completed = officerTasks.filter(t => t.completed).length;
+                const total = officerTasks.length;
+                const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+                const target = officerTargets[officer] || total;
+
+                const card = document.createElement('div');
+                card.className = 'officer-card';
+                card.innerHTML = `
+                    <div class="officer-avatar">${officerIcons[officer] || '👤'}</div>
+                    <div class="officer-name">${officer}</div>
+                    <div class="officer-title">${officer === 'CEO' ? 'Chief Executive' : officer === 'Nickson' ? 'Finance Officer' : officer === 'Raymond' ? 'Credit Manager' : officer === 'Naomi' ? 'Marketing Head' : officer === 'Canton' ? 'ICT Manager' : 'Business Development'}</div>
+                    
+                    <div class="target-box">
+                        <div class="target-label">Target Tasks</div>
+                        <div class="target-value">${target}</div>
+                    </div>
+
+                    <div class="target-box">
+                        <div class="target-label">Completion Progress</div>
+                        <div class="target-value">${progress}%</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="task-count">
+                        <div class="count-item">
+                            <div class="count-number" style="color: #3498db;">${completed}</div>
+                            <div class="count-label">Completed</div>
+                        </div>
+                        <div class="count-item">
+                            <div class="count-number" style="color: #f39c12;">${total - completed}</div>
+                            <div class="count-label">Pending</div>
+                        </div>
+                        <div class="count-item">
+                            <div class="count-number" style="color: #27ae60;">${Math.max(0, target - completed)}</div>
+                            <div class="count-label">Remaining</div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
         }
 
         async function toggleTask(id) {
@@ -857,6 +1356,8 @@
                         .from('tasks')
                         .update({ completed: !task.completed })
                         .eq('id', id);
+                    
+                    showSuccess(`Task marked as ${!task.completed ? 'done' : 'pending'}!`);
                 }
             } catch (error) {
                 console.error('Toggle error:', error);
@@ -867,10 +1368,8 @@
         async function deleteTask(id) {
             if (confirm('Are you sure you want to delete this task?')) {
                 try {
-                    await supabaseClient
-                        .from('tasks')
-                        .delete()
-                        .eq('id', id);
+                    await supabaseClient.from('tasks').delete().eq('id', id);
+                    showSuccess('Task deleted successfully!');
                 } catch (error) {
                     console.error('Delete error:', error);
                     showError('Error: ' + error.message);
@@ -909,7 +1408,7 @@
                     .eq('id', id);
                 
                 closeEditModal();
-                alert('✅ Task updated!');
+                showSuccess('Task updated successfully!');
             } catch (error) {
                 console.error('Update error:', error);
                 showError('Error: ' + error.message);
@@ -929,7 +1428,7 @@
             }
             
             if (!officer) {
-                alert('Please select or enter an officer name');
+                showError('Please select or enter an officer name');
                 return;
             }
             
@@ -943,7 +1442,8 @@
                 }]);
                 
                 document.getElementById('addTaskForm').reset();
-                alert('✅ Task added successfully!');
+                showSuccess('Task added successfully!');
+                navigateTo('dashboard');
             } catch (error) {
                 console.error('Add error:', error);
                 showError('Error: ' + error.message);
@@ -983,41 +1483,16 @@
             document.getElementById('completionRate').textContent = rate + '%';
         }
 
-        async function clearCompleted() {
-            if (confirm('Uncheck all completed tasks?')) {
-                try {
-                    await supabaseClient
-                        .from('tasks')
-                        .update({ completed: false })
-                        .eq('completed', true);
-                } catch (error) {
-                    showError('Error: ' + error.message);
-                }
-            }
-        }
-
-        async function resetAllTasks() {
-            if (confirm('Reset all tasks to pending?')) {
-                try {
-                    await supabaseClient
-                        .from('tasks')
-                        .update({ completed: false })
-                        .neq('id', -1);
-                } catch (error) {
-                    showError('Error: ' + error.message);
-                }
-            }
-        }
-
         function exportToCSV() {
-            let csv = 'Department,Officer,Action Item,Deadline,Status\n';
+            let csv = 'Officer,Department,Action Item,Deadline,Status,Date Exported\n';
+            const now = new Date().toLocaleString();
             
             tasks.forEach(task => {
-                const status = task.completed ? 'Done' : 'Pending';
-                csv += `"${task.department}","${task.officer}","${task.action}","${task.deadline}","${status}"\n`;
+                const status = task.completed ? 'Completed' : 'Pending';
+                csv += `"${task.officer}","${task.department}","${task.action}","${task.deadline}","${status}","${now}"\n`;
             });
             
-            const blob = new Blob([csv], { type: 'text/csv' });
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
@@ -1026,17 +1501,8 @@
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
-        }
-
-        function updateLastUpdated() {
-            const el = document.getElementById('lastUpdated');
-            if (el) {
-                const now = new Date();
-                el.textContent = now.toLocaleTimeString('en-US', { 
-                    hour: '2-digit', 
-                    minute: '2-digit'
-                });
-            }
+            
+            showSuccess('Report exported successfully!');
         }
 
         function toggleCustomOfficer() {
@@ -1045,15 +1511,29 @@
             customGroup.style.display = officerSelect.value === 'Custom' ? 'block' : 'none';
         }
 
+        function resetAddForm() {
+            document.getElementById('addTaskForm').reset();
+            document.getElementById('customOfficerGroup').style.display = 'none';
+        }
+
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(page).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
         function showError(message) {
-            const errorEl = document.getElementById('errorMessage');
-            if (errorEl) {
-                errorEl.textContent = '❌ ' + message;
-                errorEl.style.display = 'block';
-                setTimeout(() => {
-                    errorEl.style.display = 'none';
-                }, 5000);
-            }
+            const el = document.getElementById('errorMessage');
+            el.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+
+        function showSuccess(message) {
+            const el = document.getElementById('successMessage');
+            el.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 4000);
         }
     </script>
 </body>
